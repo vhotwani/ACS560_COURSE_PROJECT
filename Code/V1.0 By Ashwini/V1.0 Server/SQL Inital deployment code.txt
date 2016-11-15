@@ -1,0 +1,67 @@
+SQL intial query
+
+
+create table userLogin (
+userid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+user_name varchar(20) NOT NULL,
+user_type varchar(20) NOT NULL,
+u_password varchar(10) NOT NULL,
+createdBy  varchar(20) NOT NULL,
+UpdatedBy varchar(20) NOT NULL,
+Modifieddate datetime NOT NULL
+);
+
+Insert into userLogin (user_name, user_type, u_password, createdBy, UpdatedBy, Modifieddate) values('ashwini','admin','qweasd','ashwini','ashwini', datetime('now'));
+Insert into userLogin (user_name, user_type, u_password, createdBy, UpdatedBy, Modifieddate) values('John','enduser','asdqwe','ashwini', 'ashwini', datetime('now'));
+Insert into userLogin (user_name, user_type, u_password, createdBy, UpdatedBy, Modifieddate) values('vinita','secmgr','asdqwe','ashwini', 'ashwini', datetime('now'));
+
+
+
+
+create table userDetails (
+userid int PRIMARY KEY NOT NULL,
+user_Full_name varchar(100) NOT NULL,
+gender char(1) NOT NULL,
+Location varchar(300) NOT NULL,
+Contact  varchar(15) NOT NULL,
+SecurityQus Varchar(100) NOT NULL,
+SecurityAns varchar(10) NOT NULL,
+createdBy  varchar(20) NOT NULL,
+UpdatedBy varchar(20) NOT NULL,
+Modifieddate datetime NOT NULL,
+FOREIGN KEY(userid) REFERENCES userLogin (userid)
+);
+Insert into userDetails (userid , user_Full_name , gender, Location, Contact , SecurityQus, SecurityAns ,createdBy, UpdatedBy, Modifieddate) values(1, 'ashwini kulkarni','F','Fortwayne 46835','260-705-9350','Favorite Food?','chips','ashwini', 'ashwini', datetime('now'));
+Insert into userDetails (userid , user_Full_name , gender, Location, Contact , SecurityQus, SecurityAns ,createdBy, UpdatedBy, Modifieddate) values(2,'john smith','M','Fortwayne 46805','260-755-9350','Pet Name?','buzo','ashwini', 'ashwini', datetime('now'));
+Insert into userDetails (userid , user_Full_name , gender, Location, Contact , SecurityQus, SecurityAns ,createdBy, UpdatedBy, Modifieddate) values(3,'vinita hotwani','F','Fortwayne 46835','260-755-9050','Pet Name?','peri','ashwini', 'ashwini', datetime('now'));
+
+		
+create table adds (
+addid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+add_name varchar(200) NOT NULL,
+userid INTEGER NOT NULL,
+add_details varchar(500) NOT NULL,
+block INTEGER,
+createdBy  varchar(20) NOT NULL,
+UpdatedBy varchar(20) NOT NULL,
+Modifieddate datetime NOT NULL,
+FOREIGN KEY(userid) REFERENCES userLogin (userid)
+);
+
+insert into adds (add_name,userid,add_details,block,createdBy,UpdatedBy,Modifieddate) values ('sale household items',6,'6 month king size bed for sale 200$',NULL,'suzy123','suzy123',datetime('now'));
+
+create table comments (
+commentid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ,
+addid INTEGER ,
+userid INTEGER NOT NULL,
+comment varchar(500) NOT NULL,
+block INTEGER,
+createdBy  varchar(20) NOT NULL,
+UpdatedBy varchar(20) NOT NULL,
+Modifieddate datetime NOT NULL,
+FOREIGN KEY(userid) REFERENCES userLogin (userid),
+FOREIGN KEY(userid) REFERENCES adds (addid)
+);	
+
+insert into comments (addid,userid,comment,block,createdBy,UpdatedBy,Modifieddate) values (1,2,'could you please send me a pic to john123@gmail.com',NULL,'john123','john123',datetime('now'));
+insert into comments (addid,userid,comment,block,createdBy,UpdatedBy,Modifieddate) values (1,7,'could you please send me a pic to mac_b@gmail.com',NULL,'mac123','mac123',datetime('now'));
